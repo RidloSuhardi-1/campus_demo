@@ -17,8 +17,11 @@
 
 <form action="<?= base_url('/mahasiswa/update/' . $mahasiswa['no_induk']); ?>" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
     <?= csrf_field(); ?>
+
+    <input type="hidden" value="<?= $mahasiswa['no_induk']; ?>" name="no_induk_old">
     <input type="hidden" value="<?= $mahasiswa['foto_pribadi']; ?>" name="foto_pribadi_old">
     <input type="hidden" value="<?= $mahasiswa['foto_ktp']; ?>" name="foto_ktp_old">
+
     <div class="row g-3">
         <div class="col-sm-6">
             <label for="no_induk" class="form-label">No Induk</label>
