@@ -14,8 +14,8 @@
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title"><?= $mahasiswa['nama']; ?></h5>
-                <p class="card-text"><b>No Induk : </b><?= $mahasiswa['no_induk']; ?></p>
+                <h5 class="card-title"><b>NO INDUK : </b><?= $mahasiswa['no_induk']; ?></h5>
+                <p class="card-text"><?= $mahasiswa['nama']; ?></p>
                 <p class="card-text"><small class="text-muted">Terdaftar sejak : <?= $mahasiswa['created_at']; ?></small></p>
 
                 <h5 class="card-text">Kartu Identitas</h5>

@@ -33,6 +33,9 @@
     <link href="/css/dashboard.css" rel="stylesheet">
     <link href="/css/lightbox.min.css" rel="stylesheet">
 
+    <!-- User CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
