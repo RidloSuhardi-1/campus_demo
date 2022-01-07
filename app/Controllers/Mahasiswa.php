@@ -52,7 +52,7 @@ class Mahasiswa extends BaseController
                 'errors' => [
                     'required' => '{field} harus diisi',
                     'is_unique' => '{field} sudah terdaftar',
-                    'min_length' => 'Panjang minimal {field} adalah 5'
+                    'min_length' => 'Panjang minimal {field} adalah 5 karakter'
                 ]
             ],
             'nama' => [
@@ -121,17 +121,45 @@ class Mahasiswa extends BaseController
 
     public function update($id)
     {
+        // cek ketersediaan index mahasiswa
+        $getAllMahasiswa = $this->mahasiswaModel->getMahasiswa();
+        $available = false;
+
+        $oldInduk = $this->request->getVar('no_induk_old');
+        $currentInduk = $this->request->getVar('no_induk');
+
+        // masih sama? skip aja..
+        if ($oldInduk == $currentInduk) {
+            $available = true;
+        } else {
+            // oh beda, kira-kira ada yang samaan ga ?
+            foreach ($getAllMahasiswa as $m) {
+                if ($m['no_induk'] == $currentInduk) {
+                    $available = false;
+                    break;
+                } else {
+                    $available = true;
+                }
+            }
+        }
+
         // dapatkan id dari mahasiswa
         $mahasiswa = $this->mahasiswaModel->getMahasiswa($id);
+
+        if ($available) {
+            $rules = 'required|integer|min_length[5]';
+        } else {
+            $rules = 'required|is_unique[mahasiswa.no_induk]|integer|min_length[5]';
+        }
 
         // validasi request
         if (!$this->validate([
             'no_induk' => [
-                'rules' => 'required|integer|min_length[5]',
+                'rules' => $rules,
                 'errors' => [
                     'required' => '{field} harus diisi',
                     'is_unique' => '{field} sudah terdaftar',
-                    'min_length' => 'Panjang minimal {field} adalah 5'
+                    'min_length' => 'Panjang minimal {field} adalah 5 karakter'
                 ]
             ],
             'nama' => [
